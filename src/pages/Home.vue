@@ -1,6 +1,10 @@
 <template>
     <div class="home">
-        <ProductModal :product="product" :active="active.product_modal" />
+        <ProductModal
+            :product="product"
+            :active="active.product_modal"
+            @close-modal="closeProductModal"
+        />
 
         <div class="container">
             <h1 class="text-3xl">This is a Home page</h1>
@@ -9,7 +13,7 @@
                     v-for="product in items"
                     :key="product.id"
                     :product="product"
-                    v-on:view-product="viewProduct($event)"
+                    @view-product="viewProduct($event)"
                 />
             </div>
         </div>
@@ -41,6 +45,9 @@ export default {
             this.product = product
             this.active.product_modal = true
             console.log(this.product)
+        },
+        closeProductModal() {
+            this.active.product_modal = false
         },
     },
 }
