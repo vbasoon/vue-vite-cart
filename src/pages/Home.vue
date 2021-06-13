@@ -32,7 +32,7 @@ export default {
             items,
             product: null,
             active: {
-                product_modal: false,
+                product_modal: true,
             },
         }
     },
