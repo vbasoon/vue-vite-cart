@@ -4,15 +4,24 @@
         :class="{ show: active }"
         @click="$emit('close-modal')"
     >
-        <div class="modal" :show="{ show: active }">
-            <div class="modal-close" @click="$emit('close-modal')">x</div>
-            <div v-if="product" class="product-details">
-                <h3 class="text-center">{{ product.name }}</h3>
-                <p class="description">{{ product.description }}</p>
-                <h3 class="text-center">${{ product.price.toFixed(2) }}</h3>
+        <div class="modal" :class="{ show: active }">
+            <div class="modal-close px-3" @click="$emit('close-modal')">x</div>
+            <div
+                v-if="product"
+                class="product-details flex flex-col justify-center"
+            >
+                <h3 class="text-center font-bold text-2xl">
+                    {{ product.name }}
+                </h3>
+                <p class="description p-5 leading-6 text-left">
+                    {{ product.description }}
+                </p>
+                <h3 class="text-center font-bold">
+                    ${{ product.price.toFixed(2) }}
+                </h3>
                 <div v-if="product_total" class="cart-total">
-                    <h3>In Cart</h3>
-                    <h4>{{ product_total }}</h4>
+                    <h3 class="text-center font-bold">In Cart</h3>
+                    <h4 class="text-center font-bold">{{ product_total }}</h4>
                 </div>
                 <div class="buttons-cart">
                     <button class="remove">Remove</button>
@@ -43,6 +52,55 @@ export default {
 
     &.show {
         display: block;
+    }
+}
+
+.modal {
+    width: 95vw;
+    height: 100vh;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: -105vw;
+    padding: 15px;
+    transition: left 0.5s;
+    z-index: 101;
+    overflow-y: scroll;
+
+    &.show {
+        left: 0;
+    }
+}
+
+.modal-close {
+    font-size: 1.5rem;
+    border-radius: 5px;
+    right: 10px;
+    border: 2px solid grey;
+    color: grey;
+    float: right;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lightgray;
+    }
+}
+
+.buttons-cart {
+    button {
+        width: 150px;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 0 5px 50px 5px;
+        cursor: pointer;
+        background-color: lightgray;
+    }
+}
+
+@media (min-width: 500px) {
+    .modal {
+        width: 450px;
     }
 }
 </style>

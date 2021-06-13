@@ -32,13 +32,14 @@ export default {
             items,
             product: null,
             active: {
-                product_modal: true,
+                product_modal: false,
             },
         }
     },
     methods: {
         viewProduct(product) {
             this.product = product
+            this.active.product_modal = true
             console.log(this.product)
         },
     },
