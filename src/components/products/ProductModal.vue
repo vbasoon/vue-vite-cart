@@ -49,7 +49,7 @@ export default {
     z-index: 100;
     display: none;
     transition: display 0.5s;
-
+    -webkit-transition: display 0.5s;
     &.show {
         display: block;
     }
@@ -64,6 +64,7 @@ export default {
     left: -105vw;
     padding: 15px;
     transition: left 0.5s;
+    -webkit-transition: left 0.5s;
     z-index: 101;
     overflow-y: scroll;
 
