@@ -1,14 +1,20 @@
 <template>
     <div>
-        <h1>CartItemCard</h1>
-        <p>Category</p>
-        <p>Name</p>
-        <p>Price</p>
+        <div v-for="product in items" :key="product.id">
+            {{ product.name }}
+        </div>
     </div>
 </template>
 
 <script>
-export default {}
+export default {
+    name: 'CardItemCard',
+    computed: {
+        items() {
+            return this.$store.getters.cartItems
+        },
+    },
+}
 </script>
 
 <style></style>
