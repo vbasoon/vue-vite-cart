@@ -37,6 +37,14 @@ export default createStore({
                     state.cart = state.cart.filter((i) => i.id !== product.id)
                 }
             }
+
+            updateLocalStorage(state.cart)
+        },
+        updateCartFromLocalStorage(state) {
+            const cart = localStorage.getItem('cart')
+            if (cart) {
+                state.cart = JSON.parse(cart)
+            }
         },
     },
     actions: {},

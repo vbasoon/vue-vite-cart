@@ -18,7 +18,13 @@
     </div>
 </template>
 
-<script setup></script>
+<script>
+export default {
+    mounted() {
+        this.$store.commit('updateCartFromLocalStorage')
+    },
+}
+</script>
 
 <style lang="scss">
 #app {
