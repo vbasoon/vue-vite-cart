@@ -2,21 +2,23 @@
     <div>
         <h1 class="text-3xl">Your Cart</h1>
 
-        <div v-for="product in items" :key="product.id">
-            {{ product.name }}
-        </div>
+        <CartItemCard
+            v-for="product in products"
+            :key="product.id"
+            :product="product"
+        />
     </div>
 </template>
 
 <script>
-import CartItemCard from '../components/products/CardItemCard.vue'
+import CartItemCard from '../components/cart/CartItemCard.vue'
 export default {
     name: 'Cart',
     components: {
         CartItemCard,
     },
     computed: {
-        items() {
+        products() {
             return this.$store.getters.cartItems
         },
     },
