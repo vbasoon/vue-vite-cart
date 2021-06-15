@@ -3,30 +3,29 @@
         class="modal-background w-full h-screen fixed left-0 top-0"
         :class="{ show: active }"
         @click="$emit('close-modal')"
-    >
-        <div class="modal" :class="{ show: active }">
-            <div class="modal-close px-3" @click="$emit('close-modal')">x</div>
-            <div
-                v-if="product"
-                class="product-details flex flex-col justify-center"
-            >
-                <h3 class="text-center font-bold text-2xl">
-                    {{ product.name }}
-                </h3>
-                <p class="description p-5 leading-6 text-left">
-                    {{ product.description }}
-                </p>
-                <h3 class="text-center font-bold">
-                    ${{ product.price.toFixed(2) }}
-                </h3>
-                <div v-if="product_total" class="cart-total">
-                    <h3 class="text-center font-bold">In Cart</h3>
-                    <h4 class="text-center font-bold">{{ product_total }}</h4>
-                </div>
-                <div class="buttons-cart">
-                    <button class="remove">Remove</button>
-                    <button class="add">Add</button>
-                </div>
+    ></div>
+    <div class="modal" :class="{ show: active }">
+        <div class="modal-close px-3" @click="$emit('close-modal')">x</div>
+        <div
+            v-if="product"
+            class="product-details flex flex-col justify-center"
+        >
+            <h3 class="text-center font-bold text-2xl">
+                {{ product.name }}
+            </h3>
+            <p class="description p-5 leading-6 text-left">
+                {{ product.description }}
+            </p>
+            <h3 class="text-center font-bold">
+                ${{ product.price.toFixed(2) }}
+            </h3>
+            <div v-if="product_total" class="cart-total">
+                <h3 class="text-center font-bold">In Cart</h3>
+                <h4 class="text-center font-bold">{{ product_total }}</h4>
+            </div>
+            <div class="buttons-cart">
+                <button class="remove" @click="removeFromCart()">Remove</button>
+                <button class="add" @click="addToCart()">Add</button>
             </div>
         </div>
     </div>
@@ -35,9 +34,17 @@
 <script>
 export default {
     props: ['product', 'active'],
+    methods: {
+        addToCart() {
+            this.$store.commit('addToCart', this.product)
+        },
+        removeFromCart() {
+            this.$store.commit('removeFromCart', this.product)
+        },
+    },
     computed: {
         product_total() {
-            return 56.0
+            return this.$store.getters.productQuantity(this.product)
         },
     },
 }
